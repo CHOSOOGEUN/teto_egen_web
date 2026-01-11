@@ -36,6 +36,11 @@ def index():
 
             if file:
                 image = Image.open(file.stream)
+                image.thumbnail((800, 800))  # 사진 크기를 최대 800px로 줄임 (화질은 충분함)
+                image = image.convert('RGB') # PNG 파일 등 호환성 문제 해결
+                
+                buffered = io.BytesIO()
+                image.save(buffered, format="JPEG", quality=80) # 용량도 80%로 살짝 압축
                 
                 buffered = io.BytesIO()
                 image.save(buffered, format="JPEG")
