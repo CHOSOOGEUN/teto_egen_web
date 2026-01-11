@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>테토 vs 에겐 테스트</title>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4048292583341541" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Pretendard', sans-serif; padding-bottom: 50px; }
+        .gradient-bg { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); }
+        .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .loader {
+            border: 4px solid rgba(255, 255, 255, 0.1); border-left-color: #a855f7;
+            border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        /* 광고 박스: 네모 반듯하게 (카카오 정책 준수) */
+        .ad-box { 
+            width: 100%; 
+            background: rgba(255,255,255,0.03); 
+            display: flex; align-items: center; justify-content: center; 
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body class="gradient-bg text-white min-h-screen flex items-center justify-center p-4">
+
+    <div class="glass max-w-md w-full rounded-3xl p-8 text-center shadow-2xl relative z-10">
+        
+        <div class="ad-box" style="height: 100px;">
+            <ins class="kakao_ad_area" style="display:none;" 
+                 data-ad-unit    = "DAN-5k0V137OQG5P1HJK" 
+                 data-ad-width   = "320" 
+                 data-ad-height  = "100"></ins> 
+            <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+        </div>
+
+        <h1 class="text-4xl font-black mb-2 tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+            TETO vs EGEN
+        </h1>
+        <p class="text-gray-400 mb-6 text-sm">내 얼굴의 호르몬 분위기 분석 AI</p>
+
+        <form id="uploadForm" action="/" method="post" enctype="multipart/form-data" class="space-y-6" onsubmit="showLoading()">
+            <div class="relative group cursor-pointer">
+                <input type="file" name="file" id="file" class="hidden" accept="image/*" onchange="previewImage(this)">
+                <label for="file" class="block w-full h-56 border-2 border-dashed border-gray-600 rounded-2xl flex flex-col items-center justify-center hover:border-purple-500 transition-colors bg-gray-900/50">
+                    <div id="preview-container" class="flex flex-col items-center">
+                        <svg class="w-10 h-10 text-gray-500 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                        <span class="text-gray-400 text-sm font-bold">사진을 올려주세요</span>
+                        <span class="text-gray-600 text-[10px] mt-1">AI가 5초 만에 분석합니다</span>
+                    </div>
+                    <img id="preview" class="hidden w-full h-full object-cover rounded-2xl opacity-70">
+                </label>
+            </div>
+
+            <button type="submit" class="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl font-bold text-lg shadow-lg hover:shadow-purple-500/30 transition-all transform hover:scale-[1.02]">
+                분석 시작하기 🚀
+            </button>
+        </form>
+
+        <div class="mt-8">
+            <p class="text-gray-500 text-[10px] mb-2 font-bold">SPONSORED</p>
+            <div class="ad-box" style="height: 250px;">
+                <ins class="kakao_ad_area" style="display:none;" 
+                     data-ad-unit    = "DAN-1d1TNluM8mhb6Pm8" 
+                     data-ad-width   = "300" 
+                     data-ad-height  = "250"></ins> 
+                <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+            </div>
+        </div>
+    </div>
+
+    <div id="loadingOverlay" class="fixed inset-0 bg-black/95 z-50 hidden flex flex-col items-center justify-center backdrop-blur-md px-6">
+        <div class="loader mb-6"></div>
+        <h2 class="text-2xl font-bold text-white mb-2 animate-pulse">분석 중입니다...</h2>
+        <p class="text-gray-400 text-sm mb-8 text-center">잠시만 기다려주세요.<br>AI가 얼굴 특징을 추출하고 있습니다.</p>
+        
+        <div class="w-full max-w-sm bg-white/5 rounded-xl border border-white/10 p-4">
+            <div class="ad-box" style="height: 250px; background: rgba(0,0,0,0.3);">
+                <ins class="kakao_ad_area" style="display:none;" 
+                     data-ad-unit    = "DAN-1d1TNluM8mhb6Pm8" 
+                     data-ad-width   = "300" 
+                     data-ad-height  = "250"></ins> 
+                <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+            </div>
+            <p class="text-center text-gray-600 text-[10px] mt-2">Server supported by Ads ❤️</p>
+        </div>
+    </div>
+
+    <script>
+        function previewImage(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('preview').src = e.target.result;
+                    document.getElementById('preview').classList.remove('hidden');
+                    document.getElementById('preview-container').classList.add('hidden');
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        function showLoading() {
+            const fileInput = document.getElementById('file');
+            if (!fileInput.files || fileInput.files.length === 0) {
+                alert("사진을 먼저 선택해주세요!");
+                event.preventDefault();
+                return;
+            }
+            document.getElementById('loadingOverlay').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
