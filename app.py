@@ -14,7 +14,7 @@ if not GOOGLE_API_KEY:
 else:
     genai.configure(api_key=GOOGLE_API_KEY)
 
-model = genai.GenerativeModel('gemini-flash-latest')
+model = genai.GenerativeModel('gemini-pro')
 
 # ==========================================
 # ★ 추가된 부분: 구글 봇이 ads.txt를 찾을 때 보여주는 길
