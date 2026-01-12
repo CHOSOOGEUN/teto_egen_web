@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>분석 결과 - TETO vs EGEN</title>
     
+    <meta name="description" content="AI 얼굴 분석 테스트 결과입니다. 내 얼굴의 호르몬 비율과 특징을 확인해보세요.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://www.egenteto.cloud">
+    <meta property="og:title" content="TETO vs EGEN - 내 얼굴 호르몬 분석 결과 🔥">
+    <meta property="og:description" content="AI가 분석한 내 얼굴의 특징은? 지금 바로 결과를 확인하세요!">
+    <meta property="og:image" content="https://i.ibb.co/vz02L18/kakao-share-thumb.png">
+
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4048292583341541"
      crossorigin="anonymous"></script>
 
@@ -138,17 +145,14 @@
     </div>
 
     <script>
-        // 이미지 저장 기능
         function saveImage() {
             const captureArea = document.getElementById('capture-area');
-            
-            // 사용자에게 알림
             alert("이미지를 생성 중입니다. 잠시만 기다려주세요! 📸");
 
             html2canvas(captureArea, {
-                backgroundColor: "#0f0f1a", // 배경색 지정 (투명 방지)
-                scale: 2, // 고화질 캡처
-                useCORS: true, // 이미지 보안 문제 해결
+                backgroundColor: "#0f0f1a",
+                scale: 2,
+                useCORS: true,
                 allowTaint: true
             }).then(canvas => {
                 const link = document.createElement('a');
@@ -161,7 +165,6 @@
             });
         }
 
-        // 링크 공유 기능
         function shareResult() {
             const shareUrl = 'http://www.egenteto.cloud'; 
             if (navigator.share) {
