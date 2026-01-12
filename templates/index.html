@@ -85,11 +85,32 @@
         <div class="mt-12 text-left space-y-8 p-6 bg-white/5 rounded-3xl border border-white/10">
              <div class="space-y-3">
                 <h3 class="text-xl font-bold text-blue-400 flex items-center"><span class="mr-2">🐺</span> 테토(TETO)란?</h3>
-                <p class="text-gray-300 text-sm leading-relaxed">테토스테론(Testosterone)의 줄임말로, 남성 호르몬이 주도하는 얼굴 특징을 말합니다.</p>
+                <p class="text-gray-300 text-sm leading-relaxed">테토스테론(Testosterone)의 줄임말로, 남성 호르몬이 주도하는 얼굴 특징을 말합니다. 직선적인 턱선, 뚜렷한 눈썹뼈, 깊은 눈매 등이 특징이며, 야생적이고 강인한 분위기를 풍깁니다.</p>
             </div>
             <div class="space-y-3">
                 <h3 class="text-xl font-bold text-pink-400 flex items-center"><span class="mr-2">🐰</span> 에겐(EGEN)이란?</h3>
-                <p class="text-gray-300 text-sm leading-relaxed">에스트로겐(Estrogen)의 줄임말로, 여성 호르몬이 주도하는 얼굴 특징을 말합니다.</p>
+                <p class="text-gray-300 text-sm leading-relaxed">에스트로겐(Estrogen)의 줄임말로, 여성 호르몬이 주도하는 얼굴 특징을 말합니다. 부드러운 얼굴형, 큰 눈, 도톰한 입술 등이 특징이며, 섬세하고 따뜻한 분위기를 풍깁니다.</p>
+            </div>
+            <div class="space-y-3">
+                <h3 class="text-xl font-bold text-purple-400 flex items-center">
+                    <span class="mr-2">🤖</span> AI 분석 원리
+                </h3>
+                <p class="text-gray-300 text-sm leading-relaxed">
+                    Google의 최신 AI 기술인 Gemini를 활용하여 얼굴의 미세한 특징을 분석합니다.
+                    단순히 이목구비의 모양뿐만 아니라, 얼굴 골격과 비율에서 느껴지는 호르몬적 분위기를
+                    수치화하여 5초 만에 정확한 결과를 제공합니다.
+                </p>
+            </div>
+        </div>
+
+        <div class="mt-8">
+            <p class="text-gray-500 text-[10px] mb-2 font-bold">SPONSORED</p>
+            <div class="ad-box" style="height: 250px;">
+                <ins class="kakao_ad_area" style="display:none;" 
+                     data-ad-unit    = "DAN-1d1TNluM8mhb6Pm8" 
+                     data-ad-width   = "300" 
+                     data-ad-height  = "250"></ins> 
+                <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
             </div>
         </div>
     </div>
@@ -98,8 +119,8 @@
         <div class="loader mb-6"></div>
         <h2 class="text-2xl font-bold text-white mb-2 animate-pulse">분석 중입니다...</h2>
         <p class="text-gray-400 text-sm mb-8 text-center">
-            정밀 분석을 위해 약 10초가 소요됩니다.<br>
-            잠시만 기다려주세요.
+            정밀 분석을 위해 약 15초가 소요됩니다.<br>
+            나가지 말고 잠시만 기다려주세요.
         </p>
     </div>
 
@@ -141,15 +162,15 @@
                 return;
             }
 
-            // 1. 심플 로딩 화면 표시
+            // 1. 심플 로딩
             document.getElementById('loadingOverlay').classList.remove('hidden');
 
-            // 2. 10초 후 광고 팝업 띄우기 (2.5초 -> 10초로 변경)
+            // 2. 10초 후 팝업
             setTimeout(() => {
                 document.getElementById('loadingOverlay').classList.add('hidden');
                 document.getElementById('adPopupOverlay').classList.remove('hidden');
                 
-                // 광고 스크립트 강제 실행
+                // 광고 강제 실행
                 const adBox = document.getElementById('adPopupOverlay').querySelector('.ad-box');
                 const oldScript = adBox.querySelector('script');
                 if(oldScript) oldScript.remove();
@@ -159,13 +180,11 @@
                 script.async = true;
                 adBox.appendChild(script);
 
-            }, 10000); // 10초 대기
+            }, 15000); 
         }
 
         function realSubmit() {
-            // 진짜 폼 전송
             document.getElementById('uploadForm').submit();
-            // 결과 페이지로 넘어가는 동안 다시 로딩화면을 보여줌 (사용자 안심용)
             document.getElementById('adPopupOverlay').classList.add('hidden');
             document.getElementById('loadingOverlay').classList.remove('hidden');
         }
