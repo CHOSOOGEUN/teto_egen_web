@@ -160,16 +160,21 @@
                 return;
             }
             
+            // 1. 로딩 화면 보여주기
             document.getElementById('loadingOverlay').classList.remove('hidden');
 
-            // 광고 스크립트 강제 주입
-            const adBox = document.getElementById('loading-ad-box');
-            if (adBox && !adBox.querySelector('script')) { 
-                const script = document.createElement('script');
-                script.src = "//t1.daumcdn.net/kas/static/ba.min.js";
-                script.async = true;
-                adBox.appendChild(script);
-            }
+            // 2. 광고 스크립트 주입 (0.5초 딜레이 적용 ⭐️)
+            // 화면이 완전히 뜬 뒤에 광고를 불러야 오류가 안 납니다!
+            setTimeout(function() {
+                const adBox = document.getElementById('loading-ad-box');
+                // 이미 스크립트가 있으면 중복 실행 방지
+                if (adBox && !adBox.querySelector('script')) { 
+                    const script = document.createElement('script');
+                    script.src = "//t1.daumcdn.net/kas/static/ba.min.js";
+                    script.async = true;
+                    adBox.appendChild(script);
+                }
+            }, 500); // 500 = 0.5초
         }
     </script>
 </body>
