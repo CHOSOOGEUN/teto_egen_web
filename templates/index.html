@@ -10,12 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>테토 vs 에겐 테스트 - AI 얼굴 분석</title>
     
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧬</text></svg>">
+
     <meta name="description" content="AI 얼굴 분석 테스트. 테토스테론(TETO)과 에스트로겐(EGEN) 호르몬 관상 테스트.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="http://www.egenteto.cloud">
     <meta property="og:title" content="TETO vs EGEN - 내 얼굴 호르몬 분석 AI 🧬">
     <meta property="og:description" content="나는 남성 호르몬(TETO)상일까, 여성 호르몬(EGEN)상일까? AI가 5초 만에 관상을 분석해 드립니다.">
-    <meta property="og:image" content="https://placehold.co/1200x630/1a1a2e/ffffff?text=TETO+vs+EGEN%0AAI+Face+Analysis&font=roboto">
+    
+    <meta property="og:image" content="https://placehold.co/1200x630/1a1a2e/FFF?text=TETO+vs+EGEN%0AAI+Analysis&font=montserrat">
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4048292583341541" crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -120,7 +123,7 @@
         <h2 class="text-2xl font-bold text-white mb-2 animate-pulse">분석 중입니다...</h2>
         <p class="text-gray-400 text-sm mb-8 text-center">
             정밀 분석을 위해 약 15초가 소요됩니다.<br>
-            나가지 말고 잠시만 기다려주세요.
+            잠시만 기다려주세요.
         </p>
     </div>
 
@@ -162,15 +165,12 @@
                 return;
             }
 
-            // 1. 심플 로딩
             document.getElementById('loadingOverlay').classList.remove('hidden');
 
-            // 2. 10초 후 팝업
             setTimeout(() => {
                 document.getElementById('loadingOverlay').classList.add('hidden');
                 document.getElementById('adPopupOverlay').classList.remove('hidden');
                 
-                // 광고 강제 실행
                 const adBox = document.getElementById('adPopupOverlay').querySelector('.ad-box');
                 const oldScript = adBox.querySelector('script');
                 if(oldScript) oldScript.remove();
