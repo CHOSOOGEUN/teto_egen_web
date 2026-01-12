@@ -159,17 +159,7 @@
         }
 
         function shareResult() {
-            const shareUrl = 'http://www.egenteto.cloud'; 
-            if (navigator.share) {
-                navigator.share({
-                    title: 'TETO vs EGEN',
-                    text: '너의 얼굴은 에겐이야 테토야?',
-                    url: shareUrl
-                });
-            } else {
-                navigator.clipboard.writeText(shareUrl);
-                alert("링크가 복사되었습니다!");
-            }
+            const shareUrl = 'https://www.egenteto.cloud'; 
         }
     </script>
 </body>
