@@ -12,6 +12,7 @@
     <meta property="og:url" content="http://www.egenteto.cloud">
     <meta property="og:title" content="TETO vs EGEN - 내 얼굴 호르몬 분석 AI 🧬">
     <meta property="og:description" content="나는 남성 호르몬(TETO)상일까, 여성 호르몬(EGEN)상일까? AI가 5초 만에 관상을 분석해 드립니다.">
+    
     <meta property="og:image" content="https://placehold.co/1200x630/1a1a2e/ffffff?text=TETO+vs+EGEN%0AAI+Face+Analysis&font=roboto">
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4048292583341541"
@@ -163,18 +164,23 @@
             // 1. 로딩 화면 보여주기
             document.getElementById('loadingOverlay').classList.remove('hidden');
 
-            // 2. 광고 스크립트 주입 (0.5초 딜레이 적용 ⭐️)
-            // 화면이 완전히 뜬 뒤에 광고를 불러야 오류가 안 납니다!
+            // 2. 광고 스크립트 "강제" 주입 (캐시 방지 + 0.5초 딜레이)
             setTimeout(function() {
                 const adBox = document.getElementById('loading-ad-box');
-                // 이미 스크립트가 있으면 중복 실행 방지
-                if (adBox && !adBox.querySelector('script')) { 
-                    const script = document.createElement('script');
-                    script.src = "//t1.daumcdn.net/kas/static/ba.min.js";
-                    script.async = true;
-                    adBox.appendChild(script);
-                }
-            }, 500); // 500 = 0.5초
+                
+                // 혹시 기존에 잘못 들어간 스크립트가 있다면 삭제 (깨끗하게 시작)
+                const oldScript = adBox.querySelector('script');
+                if (oldScript) oldScript.remove();
+
+                // 새 스크립트 생성
+                const script = document.createElement('script');
+                
+                // ★ 핵심: 주소 뒤에 현재 시간을 붙여서 "이건 새거야!"라고 브라우저를 속임
+                script.src = "//t1.daumcdn.net/kas/static/ba.min.js?" + new Date().getTime();
+                script.async = true;
+                
+                adBox.appendChild(script);
+            }, 500); 
         }
     </script>
 </body>
