@@ -8,6 +8,8 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4048292583341541"
      crossorigin="anonymous"></script>
 
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
@@ -46,9 +48,9 @@
         <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
     </div>
 
-    <div class="glass-card max-w-md w-full rounded-3xl overflow-hidden shadow-2xl relative">
+    <div id="capture-area" class="glass-card max-w-md w-full rounded-3xl overflow-hidden shadow-2xl relative bg-[#13131f]">
         <div class="w-full relative bg-black/50">
-            <img src="{{ image_url }}" class="w-full h-auto max-h-[500px] object-contain mx-auto">
+            <img src="{{ image_url }}" class="w-full h-auto max-h-[500px] object-contain mx-auto" crossOrigin="anonymous">
             <a href="/" class="absolute top-4 left-4 px-3 py-1 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-xs font-black tracking-tighter hover:bg-black/60 transition-colors z-20">
                 TETO vs EGEN
             </a>
@@ -107,26 +109,8 @@
                     </div>
                     <p class="text-gray-400 text-xs leading-relaxed text-justify">{{ part.desc }}</p>
                 </div>
-
-                {% if loop.index == 2 %}
-                <div class="in-feed-ad">
-                    <p class="text-gray-500 text-[10px] font-bold mb-1">SPONSORED</p>
-                    <div style="height: 250px; background: rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center;">
-                        <ins class="kakao_ad_area" style="display:none;" 
-                             data-ad-unit    = "DAN-1d1TNluM8mhb6Pm8" 
-                             data-ad-width   = "300" 
-                             data-ad-height  = "250"></ins> 
-                        <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
-                    </div>
-                </div>
-                {% endif %}
                 {% endfor %}
             </div>
-
-            <button onclick="shareResult()" class="w-full py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-xl font-bold text-lg flex items-center justify-center shadow-lg hover:shadow-purple-500/30 transition-all transform hover:scale-[1.02] mb-8">
-                <ion-icon name="share-social-outline" class="text-2xl mr-2"></ion-icon>
-                친구에게 결과 공유
-            </button>
 
             <div class="flex justify-center mt-6 mb-4">
                 <ins class="kakao_ad_area" style="display:none;" 
@@ -139,7 +123,45 @@
         </div>
     </div>
 
+    <div class="max-w-md w-full mt-6 space-y-3 px-4">
+        <button onclick="saveImage()" class="w-full py-4 bg-gray-800 rounded-xl font-bold text-lg flex items-center justify-center shadow-lg border border-gray-700 hover:bg-gray-700 transition-all">
+            <ion-icon name="camera-outline" class="text-2xl mr-2"></ion-icon>
+            결과 이미지 저장 📸
+        </button>
+
+        <button onclick="shareResult()" class="w-full py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-xl font-bold text-lg flex items-center justify-center shadow-lg hover:shadow-purple-500/30 transition-all transform hover:scale-[1.02]">
+            <ion-icon name="share-social-outline" class="text-2xl mr-2"></ion-icon>
+            친구에게 결과 공유
+        </button>
+        
+        <a href="/" class="block text-center text-gray-500 text-sm underline py-2">다른 사진으로 다시하기</a>
+    </div>
+
     <script>
+        // 이미지 저장 기능
+        function saveImage() {
+            const captureArea = document.getElementById('capture-area');
+            
+            // 사용자에게 알림
+            alert("이미지를 생성 중입니다. 잠시만 기다려주세요! 📸");
+
+            html2canvas(captureArea, {
+                backgroundColor: "#0f0f1a", // 배경색 지정 (투명 방지)
+                scale: 2, // 고화질 캡처
+                useCORS: true, // 이미지 보안 문제 해결
+                allowTaint: true
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'teto-egen-result.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            }).catch(err => {
+                console.error(err);
+                alert("이미지 저장에 실패했습니다 ㅠㅠ");
+            });
+        }
+
+        // 링크 공유 기능
         function shareResult() {
             const shareUrl = 'http://www.egenteto.cloud'; 
             if (navigator.share) {
