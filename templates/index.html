@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PXSWGLXN');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>테토 vs 에겐 테스트 - AI 얼굴 분석</title>
@@ -34,7 +39,8 @@
     </style>
 </head>
 <body class="gradient-bg text-white min-h-screen flex flex-col items-center justify-center p-4">
-
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PXSWGLXN"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="hidden md:flex justify-center items-center mb-8 w-full">
         <ins class="kakao_ad_area" style="display:none;" 
              data-ad-unit    = "DAN-PR1khPDIavEpOy0z" 
@@ -91,7 +97,10 @@
     <div id="loadingOverlay" class="fixed inset-0 bg-black/95 z-50 hidden flex flex-col items-center justify-center backdrop-blur-md px-6">
         <div class="loader mb-6"></div>
         <h2 class="text-2xl font-bold text-white mb-2 animate-pulse">분석 중입니다...</h2>
-        <p class="text-gray-400 text-sm mb-8 text-center">잠시만 기다려주세요.<br>AI가 얼굴 특징을 추출하고 있습니다.</p>
+        <p class="text-gray-400 text-sm mb-8 text-center">
+            정밀 분석을 위해 약 10초가 소요됩니다.<br>
+            잠시만 기다려주세요.
+        </p>
     </div>
 
     <div id="adPopupOverlay" class="fixed inset-0 bg-black/95 z-50 hidden flex flex-col items-center justify-center backdrop-blur-md px-6">
@@ -104,7 +113,7 @@
                      data-ad-unit    = "DAN-1d1TNluM8mhb6Pm8" 
                      data-ad-width   = "300" 
                      data-ad-height  = "250"></ins> 
-                </div>
+            </div>
 
             <button onclick="realSubmit()" class="w-full py-3 bg-white text-black font-bold rounded-xl hover:bg-gray-200 transition-colors">
                 결과 확인하기 ✨
@@ -135,24 +144,28 @@
             // 1. 심플 로딩 화면 표시
             document.getElementById('loadingOverlay').classList.remove('hidden');
 
-            // 2. (가짜) 분석 시간 2초 대기 후 -> 광고 팝업 띄우기
+            // 2. 10초 후 광고 팝업 띄우기 (2.5초 -> 10초로 변경)
             setTimeout(() => {
-                document.getElementById('loadingOverlay').classList.add('hidden'); // 로딩 끄고
-                document.getElementById('adPopupOverlay').classList.remove('hidden'); // 광고 팝업 켜기
+                document.getElementById('loadingOverlay').classList.add('hidden');
+                document.getElementById('adPopupOverlay').classList.remove('hidden');
                 
-                // 광고 스크립트 강제 실행 (이때 광고를 불러옵니다)
+                // 광고 스크립트 강제 실행
+                const adBox = document.getElementById('adPopupOverlay').querySelector('.ad-box');
+                const oldScript = adBox.querySelector('script');
+                if(oldScript) oldScript.remove();
+
                 const script = document.createElement('script');
                 script.src = "//t1.daumcdn.net/kas/static/ba.min.js?" + new Date().getTime();
                 script.async = true;
-                document.getElementById('adPopupOverlay').querySelector('.ad-box').appendChild(script);
+                adBox.appendChild(script);
 
-            }, 2500); // 2.5초 뒤에 실행
+            }, 10000); // 10초 대기
         }
 
         function realSubmit() {
-            // 진짜 폼 전송 (결과 페이지로 이동)
+            // 진짜 폼 전송
             document.getElementById('uploadForm').submit();
-            // 전송되는 동안 다시 로딩화면 보여주기 (깜빡임 방지)
+            // 결과 페이지로 넘어가는 동안 다시 로딩화면을 보여줌 (사용자 안심용)
             document.getElementById('adPopupOverlay').classList.add('hidden');
             document.getElementById('loadingOverlay').classList.remove('hidden');
         }
