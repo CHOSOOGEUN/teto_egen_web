@@ -120,13 +120,12 @@
         <p class="text-gray-400 text-sm mb-8 text-center">잠시만 기다려주세요.<br>AI가 얼굴 특징을 추출하고 있습니다.</p>
         
         <div class="w-full max-w-sm bg-white/5 rounded-xl border border-white/10 p-4">
-            <div class="ad-box" style="height: 250px; background: rgba(0,0,0,0.3);">
+            <div id="loading-ad-box" class="ad-box" style="height: 250px; background: rgba(0,0,0,0.3);">
                 <ins class="kakao_ad_area" style="display:none;" 
                      data-ad-unit    = "DAN-1d1TNluM8mhb6Pm8" 
                      data-ad-width   = "300" 
                      data-ad-height  = "250"></ins> 
-                <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
-            </div>
+                </div>
             <p class="text-center text-gray-600 text-[10px] mt-2">Server supported by Ads ❤️</p>
         </div>
     </div>
@@ -143,6 +142,7 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+
         function showLoading() {
             const fileInput = document.getElementById('file');
             if (!fileInput.files || fileInput.files.length === 0) {
@@ -150,7 +150,19 @@
                 event.preventDefault();
                 return;
             }
+            
+            // 1. 로딩 화면 보여주기
             document.getElementById('loadingOverlay').classList.remove('hidden');
+
+            // 2. 광고 스크립트 강제 주입 (화면이 보일 때 로딩 시작!)
+            // 로딩 화면이 뜰 때 비로소 광고 스크립트를 넣어서 광고가 일을 하게 만듭니다.
+            const adBox = document.getElementById('loading-ad-box');
+            if (adBox && !adBox.querySelector('script')) { 
+                const script = document.createElement('script');
+                script.src = "//t1.daumcdn.net/kas/static/ba.min.js";
+                script.async = true;
+                adBox.appendChild(script);
+            }
         }
     </script>
 </body>
