@@ -38,6 +38,14 @@
 </head>
 <body class="gradient-bg text-white min-h-screen flex flex-col items-center justify-center p-4 py-10">
 
+    <div class="hidden md:flex justify-center items-center mb-8 w-full">
+        <ins class="kakao_ad_area" style="display:none;" 
+             data-ad-unit    = "DAN-PR1khPDIavEpOy0z" 
+             data-ad-width   = "728" 
+             data-ad-height  = "90"></ins> 
+        <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+    </div>
+
     <div class="glass-card max-w-md w-full rounded-3xl overflow-hidden shadow-2xl relative">
         <div class="w-full relative bg-black/50">
             <img src="{{ image_url }}" class="w-full h-auto max-h-[500px] object-contain mx-auto">
@@ -48,7 +56,8 @@
         </div>
 
         <div class="p-8 -mt-8 relative z-10">
-            <div class="ad-container mb-6" style="min-height: 100px;">
+            
+            <div class="ad-container mb-6 md:hidden" style="min-height: 100px;">
                 <ins class="kakao_ad_area" style="display:none;" 
                      data-ad-unit    = "DAN-5k0V137OQG5P1HJK" 
                      data-ad-width   = "320" 
@@ -111,39 +120,3 @@
                     </div>
                 </div>
                 {% endif %}
-                {% endfor %}
-            </div>
-
-            <button onclick="shareResult()" class="w-full py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-xl font-bold text-lg flex items-center justify-center shadow-lg hover:shadow-purple-500/30 transition-all transform hover:scale-[1.02] mb-8">
-                <ion-icon name="share-social-outline" class="text-2xl mr-2"></ion-icon>
-                친구에게 결과 공유
-            </button>
-
-            <div class="flex justify-center mt-6 mb-4">
-                <ins class="kakao_ad_area" style="display:none;" 
-                     data-ad-unit    = "DAN-1d1TNluM8mhb6Pm8" 
-                     data-ad-width   = "300" 
-                     data-ad-height  = "250"></ins> 
-                <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
-            </div>
-            
-        </div>
-    </div>
-
-    <script>
-        function shareResult() {
-            const shareUrl = 'http://www.egenteto.cloud'; 
-            if (navigator.share) {
-                navigator.share({
-                    title: 'TETO vs EGEN',
-                    text: '내 얼굴 부위별 상세 분석 결과야! 👇',
-                    url: shareUrl
-                });
-            } else {
-                navigator.clipboard.writeText(shareUrl);
-                alert("링크가 복사되었습니다!");
-            }
-        }
-    </script>
-</body>
-</html>

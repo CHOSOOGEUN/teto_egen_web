@@ -20,7 +20,6 @@
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
-        /* 광고 박스 */
         .ad-box { 
             width: 100%; 
             background: rgba(255,255,255,0.03); 
@@ -29,11 +28,19 @@
         }
     </style>
 </head>
-<body class="gradient-bg text-white min-h-screen flex items-center justify-center p-4">
+<body class="gradient-bg text-white min-h-screen flex flex-col items-center justify-center p-4">
+
+    <div class="hidden md:flex justify-center items-center mb-8 w-full">
+        <ins class="kakao_ad_area" style="display:none;" 
+             data-ad-unit    = "DAN-PR1khPDIavEpOy0z" 
+             data-ad-width   = "728" 
+             data-ad-height  = "90"></ins> 
+        <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+    </div>
 
     <div class="glass max-w-md w-full rounded-3xl p-8 text-center shadow-2xl relative z-10">
         
-        <div class="ad-box" style="height: 100px;">
+        <div class="ad-box md:hidden" style="height: 100px;">
             <ins class="kakao_ad_area" style="display:none;" 
                  data-ad-unit    = "DAN-5k0V137OQG5P1HJK" 
                  data-ad-width   = "320" 
