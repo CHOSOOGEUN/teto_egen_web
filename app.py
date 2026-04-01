@@ -48,39 +48,22 @@ def index():
                 image_url = f"data:image/jpeg;base64,{img_str}"
 
                 prompt = """
-                이 사람의 얼굴과 분위기를 분석해서 다음 6가지 밴드 포지션 중 어디에 가장 잘 어울리는지 관상을 분석해줘.
-                포지션: 보컬(Vocal), 리드기타(Lead Guitar), 리듬기타(Rhythm Guitar), 베이스(Bass), 드럼(Drum), 키보드(Keyboard)
+                이 사람의 얼굴을 분석해서 'TETO(테토)' 성향과 'EGEN(에겐)' 성향 중 어디에 가까운지 퍼센트로 알려줘.
+                TETO는 남성 호르몬(테스토스테론)이 높은 관상으로 직선적이고 턱선이 굵고 눈썹뼈가 발달하고 눈매가 깊은 특징이 있어.
+                EGEN은 여성 호르몬(에스트로겐)이 높은 관상으로 곡선적이고 피부가 부드럽고 눈이 크고 입술이 도톰한 특징이 있어.
                 
-                각 포지션의 전형적인 관상 및 분위기 특징:
-                - 보컬: 시선을 끄는 화려함과 카리스마, 감수성이 풍부해 보이는 눈빛.
-                - 리드기타: 날렵하고 예민한 인상, 테크니컬하고 독보적인 분위기.
-                - 리듬기타: 안정감 있고 다정다감한 인상, 묵묵히 받쳐줄 것 같은 부드러움과 듬직함.
-                - 베이스: 무심하고 나른한 인상, 차분하고 미스터리한 매력.
-                - 드럼: 에너지가 넘치고 호쾌한 인상, 장난기 많고 활동적인 분위기.
-                - 키보드: 지적이고 섬세한 인상, 깔끔하고 이지적인 분위기.
-                
-                각 포지션과의 싱크로율(얼마나 잘 어울리는지)을 0~100 사이의 점수(퍼센트)로 평가해줘. 가장 점수가 높은 포지션을 top_position으로 설정해.
-                그리고 'celebrity' 항목에는 아이돌이 아닌, 국내외 실제 유명 밴드 멤버 중에서 가장 분위기가 비슷한 사람을 매칭해줘. (예: 잔나비 최정훈, 데이식스 영케이, 콜드플레이 크리스 마틴 등)
-                
-                반드시 아래 JSON 형식으로만 답해줘. 마크다운 기호 없이 순수 JSON 문자열만 출력해.
+                반드시 아래 JSON 형식으로만 답해줘. 다른 말은 하지 마.
                 {
-                    "top_position": "베이스",
-                    "scores": {
-                        "vocal": 15,
-                        "lead_guitar": 10,
-                        "rhythm_guitar": 20,
-                        "bass": 85,
-                        "drum": 10,
-                        "keyboard": 30
-                    },
-                    "type_name": "무심한 듯 매력적인 베이시스트",
-                    "celebrity": "이정신(씨엔블루)",
-                    "description": "당신의 얼굴은 전체적으로 묵묵하지만 단단한 인상을 줍니다...",
+                    "teto_percent": 70,
+                    "egen_percent": 30,
+                    "type_name": "거친 야생의 늑대 테토",
+                    "celebrity": "박보검",
+                    "description": "당신의 얼굴은 전체적으로 선이 굵고...",
                     "parts_analysis": [
-                        {"part": "눈", "position": "베이스", "desc": "깊고 차분한 눈매가 특유의 나른함을..."},
-                        {"part": "코", "position": "드럼", "desc": "둥글고 친근한 코끝이..."},
-                        {"part": "입매", "position": "보컬", "desc": "시원한 입꼬리가..."},
-                        {"part": "분위기", "position": "베이스", "desc": "전체적으로 차분하고 미스터리한..."}
+                        {"part": "눈", "teto": 80, "egen": 20, "desc": "눈매가 깊고..."},
+                        {"part": "코", "teto": 60, "egen": 40, "desc": "코가 높고..."},
+                        {"part": "턱선/얼굴형", "teto": 90, "egen": 10, "desc": "턱선이 날렵하고..."},
+                        {"part": "분위기", "teto": 70, "egen": 30, "desc": "전체적으로 차가운..."}
                     ]
                 }
                 """
@@ -88,7 +71,7 @@ def index():
                 import json
                 response = model.generate_content([prompt, image])
                 
-                text = response.text.strip().replace("```json", "").replace("```", "")
+                text = response.text.replace("```json", "").replace("```", "")
                 result = json.loads(text)
                 
                 return render_template('result.html', result=result, image_url=image_url)
