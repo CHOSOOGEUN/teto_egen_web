@@ -40,10 +40,7 @@ def index():
                 image = image.convert('RGB') # PNG 파일 등 호환성 문제 해결
                 
                 buffered = io.BytesIO()
-                image.save(buffered, format="JPEG", quality=80) # 용량도 80%로 살짝 압축
-                
-                buffered = io.BytesIO()
-                image.save(buffered, format="JPEG")
+                image.save(buffered, format="JPEG", quality=80)
                 img_str = base64.b64encode(buffered.getvalue()).decode()
                 image_url = f"data:image/jpeg;base64,{img_str}"
 
